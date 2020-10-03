@@ -127,6 +127,24 @@ install_or_update
 # Remove extra whitespace from startup command
 THEFOREST_STARTUP_COMMAND=$(echo "$THEFOREST_SERVER_STARTUP_ARGUMENTS" | tr -s " ")
 
+# Configure server name
+if [ ! "$THEFOREST_SERVER_NAME" = "" ]; then
+  echo "Setting server name to ${THEFOREST_SERVER_NAME}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -servername ${THEFOREST_SERVER_NAME}"
+fi
+
+# Configure server game port
+if [ ! "$THEFOREST_SERVER_GAME_PORT" = "" ]; then
+  echo "Setting server game port to ${THEFOREST_SERVER_GAME_PORT}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -servergameport ${THEFOREST_SERVER_GAME_PORT}"
+fi
+
+# Configure server query port
+if [ ! "$THEFOREST_SERVER_QUERY_PORT" = "" ]; then
+  echo "Setting server query port to ${THEFOREST_SERVER_QUERY_PORT}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverqueryport ${THEFOREST_SERVER_QUERY_PORT}"
+fi
+
 # Configure server IP
 if [ ! "$THEFOREST_SERVER_IP" = "" ]; then
   echo "Setting server IP to ${THEFOREST_SERVER_IP}"
