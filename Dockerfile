@@ -12,6 +12,8 @@ RUN apt-get update && \
       winbind \
       xvfb \
       wine-stable \
+      wine32 \
+      wine64 \
       screen \
       net-tools \
       iproute2 && \
@@ -78,12 +80,9 @@ RUN chown -R 1000:1000 \
     # /usr/share/nginx/html \
     # /var/log/nginx
 
-## FIXME: /dev/stderr permission issues with non-root user
 # Run as a non-root user by default
-# ENV PGID 1000
-# ENV PUID 1000
-ENV PGID 0
-ENV PUID 0
+ENV PGID 1000
+ENV PUID 1000
 
 # Expose necessary ports
 EXPOSE 8766
