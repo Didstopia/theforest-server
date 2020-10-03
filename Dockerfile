@@ -78,9 +78,12 @@ RUN chown -R 1000:1000 \
     # /usr/share/nginx/html \
     # /var/log/nginx
 
+## FIXME: /dev/stderr permission issues with non-root user
 # Run as a non-root user by default
-ENV PGID 1000
-ENV PUID 1000
+# ENV PGID 1000
+# ENV PUID 1000
+ENV PGID 0
+ENV PUID 0
 
 # Expose necessary ports
 EXPOSE 8766

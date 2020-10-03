@@ -247,8 +247,9 @@ echo "Starting server with arguments: ${THEFOREST_STARTUP_COMMAND}"
 # else
 # 	/steamcmd/rust/RustDedicated $RUST_STARTUP_COMMAND "$RUST_SERVER_PORT" +server.identity "$RUST_SERVER_IDENTITY" +server.seed "$RUST_SERVER_SEED" +server.hostname "$RUST_SERVER_NAME" +server.url "$RUST_SERVER_URL" +server.headerimage "$RUST_SERVER_BANNER_URL" +server.description "$RUST_SERVER_DESCRIPTION" +server.worldsize "$RUST_SERVER_WORLDSIZE" +server.maxplayers "$RUST_SERVER_MAXPLAYERS" +server.saveinterval "$RUST_SERVER_SAVE_INTERVAL" +app.port "$RUST_APP_PORT" &
 # fi
-## FIXME: Implement once we know the structure
-# wine /steamcmd/theforest/TheForestDedicatedServer.exe $THEFOREST_STARTUP_COMMAND
+## FIXME: This is broken when using a non-root user
+# /usr/bin/xvfb-run: 159: /usr/bin/xvfb-run: cannot create /dev/stderr: Permission denied
+# /usr/bin/xvfb-run: 83: /usr/bin/xvfb-run: cannot create /dev/stderr: Permission denied
 xvfb-run \
   --auto-servernum \
   --error-file="/dev/stderr" \
