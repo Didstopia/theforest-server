@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Enable debugging
-# set -x
+set -x
 
 # Print the user we're currently running as
 echo "Running as user: $(whoami)"
@@ -150,6 +150,7 @@ if [ ! "$THEFOREST_SERVER_IP" = "" ]; then
   echo "Setting server IP to ${THEFOREST_SERVER_IP}"
   THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip ${THEFOREST_SERVER_IP}"
 else
+  echo "Attempting to auto-discover server IP.."
   SERVER_IP=$(ip route|awk '/scope/ { print $9 }' | tail -n1)
   echo "Setting server IP to ${SERVER_IP} (auto-discovered)"
   THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip ${SERVER_IP}"
