@@ -117,6 +117,7 @@ ENV THEFOREST_SERVER_STEAM_ACCOUNT ""
 
 # Define directories to take ownership of
 # ENV CHOWN_DIRS "/app,/steamcmd,/usr/share/nginx/html,/var/log/nginx"
+ENV CHOWN_DIRS "/app,/steamcmd,/dev/stdout,/dev/stderr"
 
 # Expose the volumes
 # VOLUME [ "/steamcmd/rust" ]

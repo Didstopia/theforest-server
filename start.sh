@@ -251,7 +251,7 @@ echo "Starting server with arguments: ${THEFOREST_STARTUP_COMMAND}"
 # wine /steamcmd/theforest/TheForestDedicatedServer.exe $THEFOREST_STARTUP_COMMAND
 xvfb-run \
   --auto-servernum \
-  # --error-file="/dev/stderr" \
+  --error-file="/dev/stderr" \
   --server-args='-screen 0 640x480x24:32 -nolisten tcp -nolisten unix' \
   wine ./TheForestDedicatedServer.exe \
     $THEFOREST_STARTUP_COMMAND
