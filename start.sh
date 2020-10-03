@@ -161,6 +161,12 @@ if [ ! "$THEFOREST_SERVER_PASSWORD" = "" ]; then
   THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword ${THEFOREST_SERVER_PASSWORD}"
 fi
 
+# Configure server admin password
+if [ ! "$THEFOREST_SERVER_ADMIN_PASSWORD" = "" ]; then
+  echo "Setting server password to ${THEFOREST_SERVER_ADMIN_PASSWORD}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword_admin ${THEFOREST_SERVER_ADMIN_PASSWORD}"
+fi
+
 # Configure server Steam account
 if [ ! "$THEFOREST_SERVER_STEAM_ACCOUNT" = "" ]; then
   echo "Setting server Steam account to ${THEFOREST_SERVER_STEAM_ACCOUNT}"
