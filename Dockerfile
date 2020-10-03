@@ -12,7 +12,9 @@ RUN apt-get update && \
       winbind \
       xvfb \
       wine-stable \
-      screen && \
+      screen \
+      net-tools \
+      iproute2 && \
     rm -rf /var/lib/apt/lists/*
 
 # Remove default nginx stuff

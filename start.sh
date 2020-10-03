@@ -149,6 +149,10 @@ fi
 if [ ! "$THEFOREST_SERVER_IP" = "" ]; then
   echo "Setting server IP to ${THEFOREST_SERVER_IP}"
   THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip ${THEFOREST_SERVER_IP}"
+else
+  SERVER_IP=$(ip route|awk '/scope/ { print $9 }' | tail -n1)
+  echo "Setting server IP to ${SERVER_IP} (auto-discovered)"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip ${SERVER_IP}"
 fi
 
 # Configure server password
@@ -247,14 +251,17 @@ echo "Starting server with arguments: ${THEFOREST_STARTUP_COMMAND}"
 # wine /steamcmd/theforest/TheForestDedicatedServer.exe $THEFOREST_STARTUP_COMMAND
 xvfb-run \
   --auto-servernum \
-  --error-file="/dev/stderr" \
+  # --error-file="/dev/stderr" \
   --server-args='-screen 0 640x480x24:32 -nolisten tcp -nolisten unix' \
   wine ./TheForestDedicatedServer.exe \
     $THEFOREST_STARTUP_COMMAND
+    -savefolderpath "/steamcmd/theforest/saves/" \
+    -configfilepath "/steamcmd/theforest/config/config.cfg" \
     # -batchmode \
     # -nographics \
     # -savefolderpath "/steamcmd/theforest/saves/" \
     # -configfilepath "/steamcmd/theforest/config/config.cfg"
+    | grep -v "RenderTexture.Create failed: format unsupported - 2."
 
 # child=$!
 # wait "$child"
