@@ -261,7 +261,6 @@ xvfb-run \
   --server-args='-screen 0 640x480x24:32 -nolisten tcp -nolisten unix' \
   bash -c "wine /steamcmd/theforest/TheForestDedicatedServer.exe \
     ${THEFOREST_STARTUP_COMMAND}
-    -savefolderpath /steamcmd/theforest/saves \
     -configfilepath /steamcmd/theforest/config/config.cfg" \
 | grep -v "RenderTexture.Create failed: format unsupported - 2."
 
