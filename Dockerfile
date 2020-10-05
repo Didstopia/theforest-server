@@ -123,7 +123,7 @@ ENV THEFOREST_SERVER_STEAM_ACCOUNT ""
 ENV CHOWN_DIRS "/app,/steamcmd,/dev/stdout,/dev/stderr"
 
 # Expose the volumes
-# VOLUME [ "/steamcmd/rust" ]
+VOLUME [ "/steamcmd/theforest", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS/TheForestDedicatedServer" ]
 
 # Start the server
 CMD [ "bash", "/app/start.sh"]
