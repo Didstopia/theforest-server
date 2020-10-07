@@ -126,8 +126,9 @@ ENV THEFOREST_SERVER_AUTOSAVE_INTERVAL "15"
 # ENV CHOWN_DIRS "/app,/steamcmd,/usr/share/nginx/html,/var/log/nginx"
 ENV CHOWN_DIRS "/app,/steamcmd,/dev/stdout,/dev/stderr"
 
+## TODO: Re-enable if all is well
 # Expose the volumes
-VOLUME [ "/steamcmd/theforest", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS" ]
+VOLUME [ "/steamcmd/theforest", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS/TheForestDedicatedServer/ds" ]
 # VOLUME [ "/steamcmd/theforest", "/steamcmd/theforest/saves", "/steamcmd/theforest/config", "/steamcmd/theforest/logs" ]
 # VOLUME [ "/steamcmd/theforest", "/app/config", "/app/saves", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS/TheForestDedicatedServer" ]
 # VOLUME [ "/steamcmd/theforest", "/app/config", "/app/saves" ]

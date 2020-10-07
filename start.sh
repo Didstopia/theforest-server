@@ -5,7 +5,7 @@ set -e
 set -o pipefail
 
 # Enable debugging
-set -x
+# set -x
 
 # Print the user we're currently running as
 echo "Running as user: $(whoami)"
@@ -38,12 +38,6 @@ install_or_update
 
 # Remove extra whitespace from startup command
 THEFOREST_STARTUP_COMMAND=$(echo "$THEFOREST_SERVER_STARTUP_ARGUMENTS" | tr -s " ")
-
-# Configure server name
-if [ ! "$THEFOREST_SERVER_NAME" = "" ]; then
-  echo "Setting server name to \"${THEFOREST_SERVER_NAME}\""
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -servername \"${THEFOREST_SERVER_NAME}\""
-fi
 
 # Configure server game port
 if [ ! "$THEFOREST_SERVER_GAME_PORT" = "" ]; then
@@ -79,12 +73,6 @@ if [ ! "$THEFOREST_SERVER_ADMIN_PASSWORD" = "" ]; then
   THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword_admin ${THEFOREST_SERVER_ADMIN_PASSWORD}"
 fi
 
-# Configure server Steam account
-if [ ! "$THEFOREST_SERVER_STEAM_ACCOUNT" = "" ]; then
-  echo "Setting server Steam account to ${THEFOREST_SERVER_STEAM_ACCOUNT}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serversteamaccount ${THEFOREST_SERVER_STEAM_ACCOUNT}"
-fi
-
 # Configure server auto-save interval
 if [ ! "$THEFOREST_SERVER_AUTOSAVE_INTERVAL" = "" ]; then
   echo "Setting server auto-save interval to ${THEFOREST_SERVER_AUTOSAVE_INTERVAL} minute(s)"
@@ -97,15 +85,27 @@ if [ ! "$THEFOREST_SERVER_STARTUP_ARGUMENTS_EXTRA" = "" ]; then
   THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} ${THEFOREST_STARTUP_COMMAND_EXTRA}"
 fi
 
+# Configure server Steam account
+if [ ! "$THEFOREST_SERVER_STEAM_ACCOUNT" = "" ]; then
+  echo "Setting server Steam account to ${THEFOREST_SERVER_STEAM_ACCOUNT}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serversteamaccount ${THEFOREST_SERVER_STEAM_ACCOUNT}"
+fi
+
+# Configure server name last (in case quotes cause any issues)
+if [ ! "$THEFOREST_SERVER_NAME" = "" ]; then
+  echo "Setting server name to \"${THEFOREST_SERVER_NAME}\""
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -servername \"${THEFOREST_SERVER_NAME}\""
+fi
+
 # Set the working directory
 cd /steamcmd/theforest
 
 # Make sure the config and save folders exist
-mkdir -p /steamcmd/theforest/{saves,config,logs}
+# mkdir -p /steamcmd/theforest/{saves,config,logs}
 # mkdir -p /app/{saves,config}
 
 # Append the save and config paths to the startup command
-THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -savefolderpath \"Z:/steamcmd/theforest/saves/\" -configfilepath \"Z:/steamcmd/theforest/config/config.cfg\""
+# THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -savefolderpath \"Z:/steamcmd/theforest/saves/\" -configfilepath \"Z:/steamcmd/theforest/config/config.cfg\""
 # THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -savefolderpath \"/app/saves/\" -configfilepath \"/app/config/config.cfg\""
 
 ## FIXME: Also grep out any error lines, for a cleaner output
