@@ -83,6 +83,8 @@ RUN chown -R 1000:1000 \
 # Run as a non-root user by default
 ENV PGID 1000
 ENV PUID 1000
+# ENV PGID 0
+# ENV PUID 0
 
 # Expose necessary ports
 EXPOSE 8766
@@ -91,6 +93,7 @@ EXPOSE 26016
 
 # Setup default environment variables for the server
 ENV THEFOREST_SERVER_STARTUP_ARGUMENTS "-batchmode -load -nographics -nosteamclient -enableVAC"
+ENV THEFOREST_SERVER_STARTUP_ARGUMENTS_EXTRA ""
 ENV THEFOREST_SERVER_NAME "The Forest (Docker)"
 ENV THEFOREST_SERVER_GAME_PORT "26015"
 ENV THEFOREST_SERVER_QUERY_PORT "26016"
@@ -98,6 +101,7 @@ ENV THEFOREST_SERVER_IP ""
 ENV THEFOREST_SERVER_PASSWORD ""
 ENV THEFOREST_SERVER_ADMIN_PASSWORD ""
 ENV THEFOREST_SERVER_STEAM_ACCOUNT ""
+ENV THEFOREST_SERVER_AUTOSAVE_INTERVAL "15"
 # ENV RUST_SERVER_IDENTITY "docker"
 # ENV RUST_SERVER_PORT ""
 # ENV RUST_SERVER_SEED "12345"
@@ -123,7 +127,10 @@ ENV THEFOREST_SERVER_STEAM_ACCOUNT ""
 ENV CHOWN_DIRS "/app,/steamcmd,/dev/stdout,/dev/stderr"
 
 # Expose the volumes
-VOLUME [ "/steamcmd/theforest", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS/TheForestDedicatedServer" ]
+VOLUME [ "/steamcmd/theforest", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS" ]
+# VOLUME [ "/steamcmd/theforest", "/steamcmd/theforest/saves", "/steamcmd/theforest/config", "/steamcmd/theforest/logs" ]
+# VOLUME [ "/steamcmd/theforest", "/app/config", "/app/saves", "/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS/TheForestDedicatedServer" ]
+# VOLUME [ "/steamcmd/theforest", "/app/config", "/app/saves" ]
 
 # Start the server
 CMD [ "bash", "/app/start.sh"]

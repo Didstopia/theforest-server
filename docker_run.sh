@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -e
+set -o pipefail
+
 ./docker_build.sh
 
 docker run \
@@ -9,7 +12,9 @@ docker run \
   -p 0.0.0.0:26016:26016/udp \
   -p 0.0.0.0:8766:8766 \
   -p 0.0.0.0:8766:8766/udp \
-  -v $(pwd)/theforest_data:/steamcmd/theforest \
+  -e THEFOREST_SERVER_AUTOSAVE_INTERVAL=1 \
+  -v $(pwd)/theforest_data/game:/steamcmd/theforest \
+  -v $(pwd)/theforest_data/appdata:/app/.wine/drive_c/users/docker/AppData/LocalLow/SKS \
   $@ \
   --name theforest-server \
   -it \
