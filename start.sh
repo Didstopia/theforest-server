@@ -42,41 +42,41 @@ THEFOREST_STARTUP_COMMAND=$(echo "$THEFOREST_SERVER_STARTUP_ARGUMENTS" | tr -s "
 # Configure server game port
 if [ ! "$THEFOREST_SERVER_GAME_PORT" = "" ]; then
   echo "Setting server game port to ${THEFOREST_SERVER_GAME_PORT}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -servergameport ${THEFOREST_SERVER_GAME_PORT}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -servergameport \"${THEFOREST_SERVER_GAME_PORT}\""
 fi
 
 # Configure server query port
 if [ ! "$THEFOREST_SERVER_QUERY_PORT" = "" ]; then
   echo "Setting server query port to ${THEFOREST_SERVER_QUERY_PORT}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverqueryport ${THEFOREST_SERVER_QUERY_PORT}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverqueryport \"${THEFOREST_SERVER_QUERY_PORT}\""
 fi
 
 # Configure server IP
 if [ ! "$THEFOREST_SERVER_IP" = "" ]; then
   echo "Setting server IP to ${THEFOREST_SERVER_IP}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip ${THEFOREST_SERVER_IP}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip \"${THEFOREST_SERVER_IP}\""
 else
   SERVER_IP=$(ip route|awk '/scope/ { print $9 }' | tail -n1)
   echo "Setting server IP to ${SERVER_IP} (auto-discovered)"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip ${SERVER_IP}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverip \"${SERVER_IP}\""
 fi
 
 # Configure server password
 if [ ! "$THEFOREST_SERVER_PASSWORD" = "" ]; then
   echo "Setting server password to ${THEFOREST_SERVER_PASSWORD}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword ${THEFOREST_SERVER_PASSWORD}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword \"${THEFOREST_SERVER_PASSWORD}\""
 fi
 
 # Configure server admin password
 if [ ! "$THEFOREST_SERVER_ADMIN_PASSWORD" = "" ]; then
   echo "Setting server password to ${THEFOREST_SERVER_ADMIN_PASSWORD}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword_admin ${THEFOREST_SERVER_ADMIN_PASSWORD}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverpassword_admin \"${THEFOREST_SERVER_ADMIN_PASSWORD}\""
 fi
 
 # Configure server auto-save interval
 if [ ! "$THEFOREST_SERVER_AUTOSAVE_INTERVAL" = "" ]; then
   echo "Setting server auto-save interval to ${THEFOREST_SERVER_AUTOSAVE_INTERVAL} minute(s)"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverautosaveinterval ${THEFOREST_SERVER_AUTOSAVE_INTERVAL}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serverautosaveinterval \"${THEFOREST_SERVER_AUTOSAVE_INTERVAL}\""
 fi
 
 # Configure extra server startup arguments
@@ -88,7 +88,7 @@ fi
 # Configure server Steam account
 if [ ! "$THEFOREST_SERVER_STEAM_ACCOUNT" = "" ]; then
   echo "Setting server Steam account to ${THEFOREST_SERVER_STEAM_ACCOUNT}"
-  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serversteamaccount ${THEFOREST_SERVER_STEAM_ACCOUNT}"
+  THEFOREST_STARTUP_COMMAND="${THEFOREST_STARTUP_COMMAND} -serversteamaccount \"${THEFOREST_SERVER_STEAM_ACCOUNT}\""
 fi
 
 # Configure server name last (in case quotes cause any issues)
