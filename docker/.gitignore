@@ -1,0 +1,15 @@
+# Ignore all by default
+*
+
+# Allow git files
+!.gitignore
+!.gitattributes
+
+# Allow Docker files
+!Dockerfile
+!docker-compose.yml
+!docker-compose.yaml
+
+# Allow overlay files
+!overlay/
+!overlay/**/*

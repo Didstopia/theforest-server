@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+
+  theforest-server:
+
+    ## TODO: How can we "force" build with VSCode + Docker extension when doing "compose up"? A VSCode setting maybe?
+    # The published image on Docker Hub.
+    # image: didstopia/theforest-server:latest
+
+    # Build-time instructions for the image, such as the working directory,
+    # and the Dockerfile to use when building the image.
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # Restart the container automatically, unless it was stopped manually.
+    restart: unless-stopped
+
+    # Uncomment the next line if you want to run the container in host mode,
+    # eg. for easier port forwarding on your local network/LAN.
+    network_mode: host
+
+    # Uncomment the next lines if you wish to override any of the default environment variables,
+    # which is highly encouraged. You can also use a .env file instead.
+    # Please see the Dockerfile for an up-to-date list of available environment variables.
+    environment:
+      # THEFOREST_SERVER_STARTUP_ARGUMENTS: "-batchmode -dedicated"
+      # THEFOREST_SERVER_STARTUP_ARGUMENTS_EXTRA: ""
+      # THEFOREST_SERVER_NAME: "The Forest (Docker)"
+      # THEFOREST_SERVER_GAME_PORT: "27015"
+      # THEFOREST_SERVER_QUERY_PORT: "27016"
+      THEFOREST_SERVER_IP_AUTO: "0"
+      THEFOREST_SERVER_IP: "192.168.0.220"
+      # THEFOREST_SERVER_PASSWORD: ""
+      # THEFOREST_SERVER_ADMIN_PASSWORD: ""
+      # THEFOREST_SERVER_STEAM_ACCOUNT: ""
+      # THEFOREST_SERVER_AUTOSAVE_INTERVAL: "15"
+      # THEFOREST_SERVER_UPDATE_CHECKING: "1"
+      # THEFOREST_SERVER_UPDATE_BRANCH: "public"
+
+    # The required ports and protocols for the server to function properly.
+    ports:
+      # Steam Ports
+      - 0.0.0.0:8766:8766/tcp
+      - 0.0.0.0:8766:8766/udp
+      # Game Ports
+      - 0.0.0.0:27015:27015/tcp
+      - 0.0.0.0:27015:27015/udp
+      # Query Ports
+      - 0.0.0.0:27016:27016/tcp
+      - 0.0.0.0:27016:27016/udp
+
+    # Volumes for persisting the downloaded game data,
+    # as well as save files, config files etc.
+    volumes:
+      # Game Data
+      - ./theforest_data:/steamcmd/theforest
+      # - ./wine:/app/.wine
+      # Saves, config files etc.
+      - ./app_data:/app/data
+      # - ./data:/theforest-server/data
+      # - ./config:/theforest-server/config
+      # - ./mods:/theforest-server/mods
