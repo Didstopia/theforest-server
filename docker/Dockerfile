@@ -70,8 +70,8 @@ EXPOSE 26016/udp
 # Setup default environment variables for the server
 ## TODO: Does "-nographics" or "-nosteamclient" even work?!
 #ENV THEFOREST_SERVER_STARTUP_ARGUMENTS "-batchmode -load -nographics -nosteamclient -enableVAC"
-# ENV THEFOREST_SERVER_STARTUP_ARGUMENTS "-batchmode -dedicated -nographics -nosteamclient"
-ENV THEFOREST_SERVER_STARTUP_ARGUMENTS "-batchmode -dedicated"
+ENV THEFOREST_SERVER_STARTUP_ARGUMENTS "-batchmode -dedicated -nographics -nosteamclient"
+# ENV THEFOREST_SERVER_STARTUP_ARGUMENTS "-batchmode -dedicated"
 ENV THEFOREST_SERVER_STARTUP_ARGUMENTS_EXTRA ""
 ENV THEFOREST_SERVER_SAVE_FOLDER_PATH "/app/data/saves"
 ENV THEFOREST_SERVER_CONFIG_FILE_PATH "/app/data/config.cfg"
