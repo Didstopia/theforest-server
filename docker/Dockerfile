@@ -98,7 +98,12 @@ ENV THEFOREST_SERVER_UPDATE_BRANCH "public"
 ## TODO: Is this still necessary if we don't use wine?
 # Define directories to take ownership of
 # ENV CHOWN_DIRS "/app,/steamcmd,/usr/share/nginx/html,/var/log/nginx"
-ENV CHOWN_DIRS "/app,/steamcmd,${WINEPREFIX},/dev/stdout,/dev/stderr"
+## FIXME: This only works if the WINEPREFIX directory already exists on
+##        container startup, which it won't on a fresh install,
+##        when it's mounted as a volume, so the base image itself
+##        should always ensure that the paths exist before running chown on them!
+#ENV CHOWN_DIRS "/app,/steamcmd,${WINEPREFIX},/dev/stdout,/dev/stderr"
+ENV CHOWN_DIRS "/app,/steamcmd,/dev/stdout,/dev/stderr"
 
 ## TODO: Re-enable if all is well
 # Expose the volumes
