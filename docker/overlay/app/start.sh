@@ -204,7 +204,7 @@ echo "Starting server with arguments: ${THEFOREST_STARTUP_COMMAND}"
 xvfb-run \
   --auto-servernum \
   --server-args='-screen 0 1024x768x24 -nolisten tcp -nolisten unix' \
-  bash -c "wine64 /steamcmd/theforest/TheForestDedicatedServer.exe ${THEFOREST_STARTUP_COMMAND}" | grep -v "RenderTexture.Create failed: format unsupported - 2." | grep -v ":fixme:" # | grep -v "(Filename: " | grep -v "NullReferenceException" | grep -v "in <filename unknown>:0" | grep -v ":err:ole:" | grep -v "ALSA lib " | grep -v "(this message is harmless)" | grep -v " Unity Child Domain" | grep -v "OnLevelWasLoaded " | grep -v " deprecated " | grep -v " SceneManager.sceneLoaded "
+  bash -c "wine /steamcmd/theforest/TheForestDedicatedServer.exe ${THEFOREST_STARTUP_COMMAND}" | grep -v "RenderTexture.Create failed: format unsupported - 2." | grep -v ":fixme:" # | grep -v "(Filename: " | grep -v "NullReferenceException" | grep -v "in <filename unknown>:0" | grep -v ":err:ole:" | grep -v "ALSA lib " | grep -v "(this message is harmless)" | grep -v " Unity Child Domain" | grep -v "OnLevelWasLoaded " | grep -v " deprecated " | grep -v " SceneManager.sceneLoaded "
 
 echo "Exiting.."
 exit 0

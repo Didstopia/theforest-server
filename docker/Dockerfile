@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 didstopia/base:steamcmd-ubuntu-18.04
+FROM --platform=linux/amd64 didstopia/base:wine-steamcmd-ubuntu-24.04
 
 LABEL maintainer="Didstopia <support@didstopia.com>"
 
@@ -9,18 +9,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV PGID 1000
 ENV PUID 1000
 
-# Install dependencies
+# Install dependencies. Wine, Xvfb, winbind and the 32-bit libs come from the
+# wine-steamcmd base now, so only the extra tooling specific to this image is
+# installed here.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      libsdl2-2.0-0:i386 \
-      winbind \
-      xvfb \
-      wine-stable \
-      wine32 \
-      wine64 \
       screen \
       net-tools \
       iproute2 && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 # Configure wine environment variables
